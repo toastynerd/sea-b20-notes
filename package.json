@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/codefellows/sea-b20-notes/issues"
   },
-  "homepage": "https://github.com/codefellows/sea-b20-notes"
+  "homepage": "https://github.com/codefellows/sea-b20-notes",
+  "dependencies": {
+    "express": "^4.7.4"
+  }
 }
