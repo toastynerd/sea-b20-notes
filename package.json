@@ -18,5 +18,8 @@
   "homepage": "https://github.com/codefellows/sea-b20-notes",
   "dependencies": {
     "express": "^4.7.4"
+  },
+  "devDependencies": {
+    "debowerify": "^0.8.1"
   }
 }

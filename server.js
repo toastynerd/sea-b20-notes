@@ -7,11 +7,12 @@ app.get('/echo/:input1/:input2', function(req, res) {
   res.send({"input1" : req.params.input1, "input2" : req.params.input2});
 });
 
+
+app.use(express.static(__dirname + '/dist'));
+
 app.get('/*', function(req, res) {
   res.status(404).send('not found');
 });
-
-app.use(express.static(__dirname + '/static'));
 
 var server = http.createServer(app);
 
