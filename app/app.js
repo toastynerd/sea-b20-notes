@@ -1,5 +1,5 @@
 'use strict';
-var $   = require('jquery');
+window.$   = require('jquery');
 var pal = require('./palindrome');
 
 $.each($('li'), function(index, li)  {

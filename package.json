@@ -20,6 +20,7 @@
     "express": "^4.7.4"
   },
   "devDependencies": {
+    "chai": "^1.9.1",
     "debowerify": "^0.8.1"
   }
 }
