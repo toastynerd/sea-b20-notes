@@ -1,17 +1,13 @@
 var express = require('express');
+var bodyparser = require('body-parser');
+var mongoose = require('mongoose');
 var http = require('http');
-
 var app = express();
 
-app.get('/echo/:input1/:input2', function(req, res) {
-  res.send({"input1" : req.params.input1, "input2" : req.params.input2});
-});
+mongoose.connect(process.env.MONGO_URL || 'mongodb://localhost/notes-development');
 
-app.get('/*', function(req, res) {
-  res.status(404).send('not found');
-});
-
-app.use(express.static(__dirname + '/static'));
+app.use(bodyparser.json());
+require('./routes/note-routes')(app);
 
 var server = http.createServer(app);
 
