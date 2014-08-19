@@ -1,19 +1,21 @@
+var $ = require('jquery');
 var Note = require('./notes/models/note');
+var BasicNoteView = require('./notes/views/note-view');
+var NotesCollection = require('./notes/collections/notes-collection');
+var NotesCollectionView = require('./notes/views/notes-collection-view');
 
 var note = new Note();
 note.set('noteBody', 'wow such note, so words');
 note.set('awesomeFactor', 'ten billion');
+note.save();
 
-console.log(note.get('noteBody'));
-console.log(note);
+var note2 = new Note();
+note2.set('noteBody', 'b-flat');
+note2.save();
 
-note.save({}, {
-  success: function(res) {
-    console.log('success!');
-    console.log(res);
-  },
-  error: function(err) {
-    console.log('error');
-    console.log(err);
-  }
-});
+var notesCollection = new NotesCollection();
+var notesCollectionView = new NotesCollectionView({collection: notesCollection});
+notesCollection.fetch();    
+$('#notes').html(notesCollectionView.$el);
+
+
