@@ -1,5 +1,6 @@
+'use strict';
+/*jshint expr:true */
 var chai = require('chai');
-var Backbone = require('backbone');
 var sinon = require('sinon');
 var expect = chai.expect;
 
@@ -12,7 +13,7 @@ describe('Backbone NotesCollectionView', function() {
     sinon.spy(NotesCollectionView.prototype, 'render');
     sinon.spy(NotesCollectionView.prototype, 'addAll');
     sinon.spy(NotesCollectionView.prototype, 'addNote');
-    this.collection = new NotesCollection(); 
+    this.collection = new NotesCollection();
     this.view = new NotesCollectionView({collection: this.collection});
   });
 
@@ -28,9 +29,9 @@ describe('Backbone NotesCollectionView', function() {
   });
 
   it('should call addNote', function(done) {
-    this.collection.add(new Note());  
+    this.collection.add(new Note());
     expect(NotesCollectionView.prototype.addNote.called).to.be.true;
-    done(); 
+    done();
   });
 
   it('should not have a blank $el', function(done) {
