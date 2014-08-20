@@ -23328,14 +23328,14 @@ if (typeof module !== 'undefined' && module.exports) {
 });
 
 },{}],72:[function(require,module,exports){
-var chai = require('chai');
+'use strict';
+/*jshint expr:true */
 var Backbone = require("./../../../app/bower_components/backbone/backbone.js");
 var sinon = require('sinon');
-var expect = chai.expect;
 
 var NoteCollection = require('../../../app/js/notes/collections/notes-collection');
 
-describe('Backbone Collection', function() {
+describe('Backbone Note Collection', function() {
   var noteCollection;
   before(function(done) {
     this.mock = sinon.mock(Backbone);
@@ -23344,7 +23344,7 @@ describe('Backbone Collection', function() {
   });
 
   it('should talk with the api on a fetch', function(done) {
-    this.mock.expects('ajax').withArgs(sinon.match({type: "GET", url: '/api/v_0_0_1/notes'}));
+    this.mock.expects('ajax').withArgs(sinon.match({type: 'GET', url: '/api/v_0_0_1/notes'}));
     noteCollection.fetch();
     done();
   });
@@ -23354,9 +23354,10 @@ describe('Backbone Collection', function() {
   });
 });
 
-},{"../../../app/js/notes/collections/notes-collection":4,"./../../../app/bower_components/backbone/backbone.js":1,"chai":10,"sinon":57}],73:[function(require,module,exports){
+},{"../../../app/js/notes/collections/notes-collection":4,"./../../../app/bower_components/backbone/backbone.js":1,"sinon":57}],73:[function(require,module,exports){
+'use strict';
+/*jshint expr:true */
 var chai = require('chai');
-var Backbone = require("./../../../app/bower_components/backbone/backbone.js");
 var sinon = require('sinon');
 var expect = chai.expect;
 
@@ -23369,7 +23370,7 @@ describe('Backbone NotesCollectionView', function() {
     sinon.spy(NotesCollectionView.prototype, 'render');
     sinon.spy(NotesCollectionView.prototype, 'addAll');
     sinon.spy(NotesCollectionView.prototype, 'addNote');
-    this.collection = new NotesCollection(); 
+    this.collection = new NotesCollection();
     this.view = new NotesCollectionView({collection: this.collection});
   });
 
@@ -23385,9 +23386,9 @@ describe('Backbone NotesCollectionView', function() {
   });
 
   it('should call addNote', function(done) {
-    this.collection.add(new Note());  
+    this.collection.add(new Note());
     expect(NotesCollectionView.prototype.addNote.called).to.be.true;
-    done(); 
+    done();
   });
 
   it('should not have a blank $el', function(done) {
@@ -23402,7 +23403,9 @@ describe('Backbone NotesCollectionView', function() {
   });
 });
 
-},{"../../../app/js/notes/collections/notes-collection":4,"../../../app/js/notes/models/note":5,"../../../app/js/notes/views/notes-collection-view":9,"./../../../app/bower_components/backbone/backbone.js":1,"chai":10,"sinon":57}],74:[function(require,module,exports){
+},{"../../../app/js/notes/collections/notes-collection":4,"../../../app/js/notes/models/note":5,"../../../app/js/notes/views/notes-collection-view":9,"chai":10,"sinon":57}],74:[function(require,module,exports){
+'use strict';
+/*jshint expr:true */
 var chai = require('chai');
 var Backbone = require("./../../../app/bower_components/backbone/backbone.js");
 var sinon = require('sinon');
@@ -23426,7 +23429,7 @@ describe('Backbone Note', function() {
   });
 
   it('Should talk with the api on save', function(done) {
-    this.mock.expects('ajax').withArgs(sinon.match({type: "POST", url: '/api/v_0_0_1/notes'})); 
+    this.mock.expects('ajax').withArgs(sinon.match({type: 'POST', url: '/api/v_0_0_1/notes'}));
     note.save();
     done();
   });
@@ -23437,6 +23440,8 @@ describe('Backbone Note', function() {
 });
 
 },{"../../../app/js/notes/models/note":5,"./../../../app/bower_components/backbone/backbone.js":1,"chai":10,"sinon":57}],75:[function(require,module,exports){
+'use strict';
+/*jshint expr:true */
 var chai = require('chai');
 var Backbone = require("./../../../app/bower_components/backbone/backbone.js");
 var sinon = require('sinon');
