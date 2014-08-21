@@ -17,11 +17,11 @@ module.exports = Backbone.View.extend({
 
   addNote: function(note) {
     var noteView = new NoteView({model: note});
-    this.$el.children('#notes').append(noteView.$el); 
+    this.$el.children('#notescollection').append(noteView.$el); 
   },
 
   addAll: function() {
-    this.$el.children('#notes').html('');
+    this.$el.children('#notescollection').html('');
     this.collection.forEach(this.addNote);
   },
 

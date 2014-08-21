@@ -5,7 +5,7 @@ var expect = chai.expect;
 
 var NoteCollection = require('../../../app/js/notes/collections/notes-collection');
 
-describe('Backbone Collection', function() {
+describe('Backbone Note Collection', function() {
   var noteCollection;
   before(function(done) {
     this.mock = sinon.mock(Backbone);
