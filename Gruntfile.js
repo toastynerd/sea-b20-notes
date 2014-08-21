@@ -1,3 +1,4 @@
+'use strict';
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
@@ -9,7 +10,7 @@ module.exports = function(grunt) {
     clean: {
       dev: {
         src: ['build/']
-      } 
+      }
     },
 
     copy: {
@@ -18,7 +19,7 @@ module.exports = function(grunt) {
         cwd: 'app/',
         src: ['*.html', '*.css'],
         dest: 'build/',
-        filter: 'isFile' 
+        filter: 'isFile'
       }
     },
 
@@ -29,7 +30,7 @@ module.exports = function(grunt) {
           debug: true
         },
         src: ['app/js/**/*.js'],
-        dest: 'build/bundle.js' 
+        dest: 'build/bundle.js'
       },
       test: {
         options: {
