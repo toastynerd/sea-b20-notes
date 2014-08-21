@@ -1,3 +1,5 @@
+'use strict';
+/*jshint expr:true */
 var chai = require('chai');
 var Backbone = require('backbone');
 var sinon = require('sinon');
@@ -21,7 +23,7 @@ describe('Backbone Note', function() {
   });
 
   it('Should talk with the api on save', function(done) {
-    this.mock.expects('ajax').withArgs(sinon.match({type: "POST", url: '/api/v_0_0_1/notes'})); 
+    this.mock.expects('ajax').withArgs(sinon.match({type: 'POST', url: '/api/v_0_0_1/notes'}));
     note.save();
     done();
   });
