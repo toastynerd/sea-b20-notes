@@ -1,5 +1,4 @@
 'use strict';
-/*jshint expr:true */
 var Backbone = require('backbone');
 var sinon = require('sinon');
 

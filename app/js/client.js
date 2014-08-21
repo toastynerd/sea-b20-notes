@@ -1,3 +1,4 @@
+'use strict';
 var $ = require('jquery');
 var Note = require('./notes/models/note');
 var BasicNoteView = require('./notes/views/note-view');
@@ -15,7 +16,7 @@ note2.save();
 
 var notesCollection = new NotesCollection();
 var notesCollectionView = new NotesCollectionView({collection: notesCollection});
-notesCollection.fetch();    
+notesCollection.fetch();
 $('#notes').html(notesCollectionView.$el);
 
 

@@ -1,4 +1,5 @@
-//Backbone Note model
+'use strict';
+// Backbone Note model
 var Backbone = require('backbone');
 Backbone.$ = require('jquery');
 
@@ -7,7 +8,7 @@ var Note = Backbone.Model.extend({
   idAttribute: '_id',
   defaults : {
     noteBody: ''
-  } 
+  }
 });
 
 module.exports = Note;
