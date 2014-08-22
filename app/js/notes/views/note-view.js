@@ -1,3 +1,4 @@
+'use strict';
 var Backbone = require('backbone');
 var $ = require('jquery');
 Backbone.$ = $;
@@ -5,6 +6,7 @@ Backbone.$ = $;
 var NoteView = Backbone.View.extend({
   tagName: 'div',
   initialize: function() {
+    this.model.bind('change', this.render, this);
     this.render();
   },
 

@@ -60,5 +60,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
   grunt.registerTask('backbone:test', ['browserify:test', 'mocha:backbonetest']);
   grunt.registerTask('test', ['backbone:test', 'simplemocha']);
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['buildtest']);
+  grunt.registerTask('buildtest', ['test', 'build:dev']);
 };
