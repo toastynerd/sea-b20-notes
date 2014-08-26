@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
-          transform: ['debowerify', 'hbsfy'],
+          transform: ['debowerify', 'hbsify'],
           debug: true
         },
         src: ['app/js/**/*.js'],
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       test: {
         options: {
-          transform: ['hbsfy', 'debowerify'],
+          transform: ['hbsify', 'debowerify'],
           debug: true
         },
         src: ['test/mocha/backbone/**/*.js'],

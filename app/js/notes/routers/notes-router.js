@@ -21,7 +21,6 @@ module.exports = Backbone.Router.extend({
     this.notes.fetch();
     var self = this;
     this.notesView = new NotesCollectionView({collection: self.notes});
-    console.log(this.notes);
     $('#content').html(self.notesView.$el);
   },
 
@@ -32,19 +31,8 @@ module.exports = Backbone.Router.extend({
   },
 
   singleNote: function(id) {
-    console.log(id);
-    var note = new Note({id: id});
+    var note = this.notes.get(id);
     var noteView = new NoteView({model: note});
-    note.fetch({}, {
-      success: function() {
-        console.log('success!');
-      },
-      error: function() {
-        console.log('error!');
-      }
-    }).done(function() {
-      console.log('done!');
-    });
     $('#content').html(noteView.el);
   }
 });
