@@ -7,6 +7,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-simple-mocha');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-express-server');
 
   grunt.initConfig({
     clean: {
@@ -28,19 +29,11 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         options: {
-          transform: ['debowerify', 'hbsify'],
+          transform: ['debowerify'],
           debug: true
         },
         src: ['app/js/**/*.js'],
         dest: 'build/bundle.js'
-      },
-      test: {
-        options: {
-          transform: ['hbsify', 'debowerify'],
-          debug: true
-        },
-        src: ['test/mocha/backbone/**/*.js'],
-        dest: 'test/testbundle.js'
       },
       angulartest: {
         options: {
@@ -49,15 +42,6 @@ module.exports = function(grunt) {
         },
         src: ['test/angular/**/*test.js'],
         dest: 'test/angular-testbundle.js'
-      }
-    },
-
-    mocha: {
-      backbonetest: {
-        src: ['test/test.html'],
-        options: {
-          run: true
-        }
       }
     },
 
@@ -73,10 +57,26 @@ module.exports = function(grunt) {
       }
     },
 
+    express: {
+      dev: {
+        options: {
+          options: 'server.js',
+          background: true
+        }
+      }
+    },
+
     watch: {
       angulartest: {
-        files: ['app/js/**/*.js', 'app/**/*.html'],
+        files: ['app/js/**/*.js', 'app/index.html', 'app/views/**/*.html'],
         tasks: ['browserify:angulartest', 'karma:unit'],
+        options: {
+          spawn: false
+        }
+      },
+      express: {
+        files: ['app/js/**/*.js', 'app/index.html', 'app/views/**/*.html', 'server.js', 'models/*.js', 'routes/*.js'],
+        tasks: ['buildtest', 'express:dev'],
         options: {
           spawn: false
         }
@@ -84,9 +84,9 @@ module.exports = function(grunt) {
     }
   });
   grunt.registerTask('build:dev', ['clean:dev', 'browserify:dev', 'copy:dev']);
-  grunt.registerTask('backbone:test', ['browserify:test', 'mocha:backbonetest']);
-  grunt.registerTask('angulartest', ['browserify:angulartest', 'karma:unit', 'watch:angulartest']);
-  grunt.registerTask('test', ['backbone:test', 'simplemocha']);
-  grunt.registerTask('default', ['buildtest']);
+  grunt.registerTask('angulartest', ['browserify:angulartest', 'karma:unit']);
+  grunt.registerTask('angulartestwatch', ['angulartest', 'watch:angulartest']);
+  grunt.registerTask('test', ['angulartest', 'simplemocha']);
   grunt.registerTask('buildtest', ['test', 'build:dev']);
+  grunt.registerTask('default', ['buildtest', 'watch:express']);
 };

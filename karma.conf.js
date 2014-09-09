@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Tue Sep 09 2014 09:02:07 GMT-0700 (PDT)
+// Generated on Tue Sep 09 2014 13:58:24 GMT-0700 (PDT)
 
 module.exports = function(config) {
   config.set({
@@ -53,7 +53,6 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
-    singleRun: true,
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: ['Chrome'],
@@ -61,10 +60,6 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-
-    plugins: [
-      'karma-chrome-launcher',
-      'karma-jasmine'
-    ]
+    singleRun: true
   });
 };
