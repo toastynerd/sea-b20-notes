@@ -44,6 +44,7 @@ describe('NotesController', function() {
     it('should be able to create a new note', function() {
       $httpBackend.expectPOST('/api/v_0_0_1/notes').respond(200, {'noteBody': 'test note'});
       ctrl = $controllerConstructor('notesController', {$scope: scope});
+      scope.newNote = {noteBody: 'test note'};
       scope.saveNewNote();
 
       $httpBackend.flush();
