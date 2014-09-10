@@ -18,7 +18,7 @@ module.exports = function(app) {
     $scope.getAllNotes();
 
     $scope.saveNewNote = function() {
-      $http.post('api/v_0_0_1/notes', $scope.newNote)
+      $http.post('/api/v_0_0_1/notes', $scope.newNote)
         .success(function(data) {
           $scope.notes.push(data);
         })
@@ -33,7 +33,7 @@ module.exports = function(app) {
 
     $scope.saveNote = function(note) {
       note.editing = null;
-      $http.put('api/v_0_0_1/notes/' + note._id, note)
+      $http.put('/api/v_0_0_1/notes/' + note._id, note)
         .success(function(data) {
           $scope.getAllNotes();
         })
@@ -43,7 +43,7 @@ module.exports = function(app) {
     };
 
     $scope.deleteNote = function(note) {
-      $http.delete('api/v_0_0_1/notes/' + note._id, note)
+      $http.delete('/api/v_0_0_1/notes/' + note._id, note)
         .success(function(data) {
           $scope.getAllNotes();
         })

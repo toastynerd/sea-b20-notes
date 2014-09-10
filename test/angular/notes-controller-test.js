@@ -20,17 +20,51 @@ describe('NotesController', function() {
     expect(typeof notesController).toBe('object'); 
   });
 
-  it('should make a get request', angular.mock.inject(function(_$httpBackend_) {
-    $httpBackend = _$httpBackend_;
+  describe('rest requests', function() {
+    var ctrl;
+    beforeEach(angular.mock.inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_; 
+      $httpBackend.expectGET('/api/v_0_0_1/notes').respond(200, [{'noteBody': 'test note'}]);
+    }));
 
-    $httpBackend.expectGET('/api/v_0_0_1/notes').respond(200, [{'noteBody': 'test note'}]);
-    var ctrl = $controllerConstructor('notesController', {$scope: scope});
+    afterEach(function() {
+      $httpBackend.verifyNoOutstandingExpectation();
+      $httpBackend.verifyNoOutstandingRequest();
+    });
 
-    $httpBackend.flush();
+    it('should make a get request', function() {
+      ctrl = $controllerConstructor('notesController', {$scope: scope});
 
-    expect(Array.isArray(scope.notes)).toBeTruthy();
-    expect(scope.notes[0].noteBody).toEqual('test note');
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  }));
+      $httpBackend.flush();
+
+      expect(Array.isArray(scope.notes)).toBeTruthy();
+      expect(scope.notes[0].noteBody).toEqual('test note');
+    });
+
+    it('should be able to create a new note', function() {
+      $httpBackend.expectPOST('/api/v_0_0_1/notes').respond(200, {'noteBody': 'test note'});
+      ctrl = $controllerConstructor('notesController', {$scope: scope});
+      scope.saveNewNote();
+
+      $httpBackend.flush();
+    });
+
+    it('should be able edit a note', function() {
+      $httpBackend.expectPUT('/api/v_0_0_1/notes/1').respond(202, {});
+      $httpBackend.expectGET('/api/v_0_0_1/notes').respond(200, [{}]);
+      ctrl = $controllerConstructor('notesController', {$scope: scope});
+      scope.saveNote({_id: '1'});
+
+      $httpBackend.flush();
+    });
+
+    it('should be able to delete a note', function() {
+      $httpBackend.expectDELETE('/api/v_0_0_1/notes/1').respond(200, {});
+      $httpBackend.expectGET('/api/v_0_0_1/notes').respond(200, [{}]);
+      ctrl = $controllerConstructor('notesController', {$scope: scope});
+      scope.deleteNote({_id: '1'});
+
+      $httpBackend.flush();
+    });
+  });
 });
