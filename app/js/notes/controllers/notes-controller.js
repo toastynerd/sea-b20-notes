@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(app) {
-  app.controller('notesController', function($scope, $http) {
+  app.controller('notesController', function($scope, $http, notesServer) {
     $scope.getAllNotes = function() {
       $http({
         method: 'GET',
@@ -18,12 +18,9 @@ module.exports = function(app) {
     $scope.getAllNotes();
 
     $scope.saveNewNote = function() {
-      $http.post('/api/v_0_0_1/notes', $scope.newNote)
+      notesServer.saveNewNote($scope.newNote)
         .success(function(data) {
           $scope.notes.push(data);
-        })
-        .error(function(data, status) {
-          console.log(data);
         });
     };
 
@@ -32,24 +29,17 @@ module.exports = function(app) {
     };
 
     $scope.saveNote = function(note) {
-      note.editing = null;
-      $http.put('/api/v_0_0_1/notes/' + note._id, note)
+      notesServer.saveNote(note)
         .success(function(data) {
           $scope.getAllNotes();
-        })
-        .error(function(data) {
-          console.log(data);
         });
     };
 
     $scope.deleteNote = function(note) {
-      $http.delete('/api/v_0_0_1/notes/' + note._id, note)
+      notesServer.deleteNote(note)
         .success(function(data) {
           $scope.getAllNotes();
         })
-        .error(function(data) {
-          console.log(data);
-        });
     };
 
     $scope.deleteAll = function() {
