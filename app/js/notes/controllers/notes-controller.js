@@ -17,10 +17,16 @@ module.exports = function(app) {
 
     $scope.getAllNotes();
 
+    $scope.cancelEdit = function(note) {
+      $scope.getAllNotes();
+      note.editing = null;
+    };
+
     $scope.saveNewNote = function() {
       $http.post('/api/v_0_0_1/notes', $scope.newNote)
         .success(function(data) {
           $scope.notes.push(data);
+          $scope.newNote.noteBody = '';
         })
         .error(function(data, status) {
           console.log(data);
