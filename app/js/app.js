@@ -5,7 +5,14 @@ require('angular-route');
 
 var notesApp = angular.module('notesApp', ['ngRoute']);
 
+//controlers
 require('./notes/controllers/notes-controller')(notesApp);
+
+//filters
+require('./filters/sentence-filter')(notesApp);
+
+//services
+require('./notes/services/notes-server')(notesApp);
 
 notesApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
