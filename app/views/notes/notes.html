@@ -10,7 +10,7 @@
       </div>
 
       <div data-ng-hide="note.editing">
-        {{note.noteBody}} 
+        {{note.noteBody | sentencify}} 
         <button data-ng-click="editNote(note)">Edit Note</button>  
         <button data-ng-click="deleteNote(note)">Delete Note</button>
       </div>
