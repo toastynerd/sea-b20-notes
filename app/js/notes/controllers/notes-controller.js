@@ -2,6 +2,7 @@
 
 module.exports = function(app) {
   app.controller('notesController', function($scope, notesServer) {
+    $scope.noteFields = ['noteBody'];
     $scope.getAllNotes = function() {
       notesServer.index()
         .success(function(data) {
@@ -18,10 +19,12 @@ module.exports = function(app) {
       }
     };
 
-    $scope.saveNewNote = function() {
+    $scope.saveNewNote = function(form) {
       notesServer.saveNewNote($scope.newNote)
         .success(function(data) {
           $scope.notes.push(data);
+          $scope.newNote.noteBody = '';
+          form.$setPristine();
         });
     };
 
@@ -31,20 +34,20 @@ module.exports = function(app) {
 
     $scope.saveNote = function(note) {
       notesServer.saveOldNote(note)
-        .success(function(data) {
+        .success(function() {
           $scope.getAllNotes();
         });
     };
 
     $scope.deleteNote = function(note) {
       notesServer.deleteNote(note)
-        .success(function(data) {
+        .success(function() {
           $scope.getAllNotes();
         });
     };
 
     $scope.deleteAll = function() {
-      $scope.notes.forEach(function(note) {$scope.deleteNote(note)});
-    }
+      $scope.notes.forEach(function(note) {$scope.deleteNote(note);});
+    };
   });
 };
