@@ -1,0 +1,19 @@
+<p>
+  <div data-ng-show="object.editing">
+    <form name="objectform">
+      <div data-ng-repeat="field in fields">
+        <input required data-ng-model="object[field]"> 
+      </div>
+      <button data-ng-click="saveObject()">Save Changes</button>
+      <button data-ng-click="cancelEdit()">Cancel</button>
+    </form>
+  </div>
+
+  <div data-ng-hide="object.editing">
+    <div data-ng-repeat="field in fields">
+      {{object[field]}}
+    </div>
+    <button data-ng-click="edit()">Edit</button>
+    <button data-ng-click="deleteObject()">Delete</button>
+  </div>
+</p>

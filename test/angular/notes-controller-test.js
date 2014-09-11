@@ -45,7 +45,7 @@ describe('NotesController', function() {
       $httpBackend.expectPOST('/api/v_0_0_1/notes').respond(200, {'noteBody': 'test note'});
       ctrl = $controllerConstructor('notesController', {$scope: scope});
       scope.newNote = {'noteBody': 'test note'};
-      scope.saveNewNote();
+      scope.saveNewNote({$setPristine: function(){}});
 
       $httpBackend.flush();
     });

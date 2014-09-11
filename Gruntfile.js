@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     express: {
       dev: {
         options: {
-          options: 'server.js',
+          script: 'server.js',
           background: true
         }
       }
@@ -71,14 +71,14 @@ module.exports = function(grunt) {
         files: ['app/js/**/*.js', 'app/index.html', 'app/views/**/*.html'],
         tasks: ['browserify:angulartest', 'karma:unit'],
         options: {
-          spawn: false
+          spawn: true 
         }
       },
       express: {
         files: ['app/js/**/*.js', 'app/index.html', 'app/views/**/*.html', 'server.js', 'models/*.js', 'routes/*.js'],
         tasks: ['buildtest', 'express:dev'],
         options: {
-          spawn: false
+          spawn: true 
         }
       }
     }

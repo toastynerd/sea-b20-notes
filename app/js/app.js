@@ -14,6 +14,10 @@ require('./filters/sentence-filter')(notesApp);
 //services
 require('./notes/services/notes-server')(notesApp);
 
+//directives
+require('./notes/directives/new-note')(notesApp);
+require('./directives/editable-directive')(notesApp);
+
 notesApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/notes', {
